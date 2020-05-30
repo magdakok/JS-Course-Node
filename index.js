@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const util = require('util');
 const fs = require('fs');
+const chalk = require('chalk');
 const {lstat} = fs.promises;
 
 fs.readdir(process.cwd(), async (err,filenames)=>{
@@ -22,6 +23,8 @@ fs.readdir(process.cwd(), async (err,filenames)=>{
 
 
 });
+
+console.log(chalk.blue('Hello world!'));
 
 // const lstat = (filename) =>{
 //     return new Promise((resolve,reject)=>{

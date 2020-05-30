@@ -19,5 +19,8 @@
   "homepage": "https://github.com/magdakok/JS-Course-Node#readme",
   "bin": {
     "nls": "index.js"
+  },
+  "dependencies": {
+    "chalk": "^4.0.0"
   }
 }
