@@ -3,28 +3,35 @@ const util = require('util');
 const fs = require('fs');
 const chalk = require('chalk');
 const {lstat} = fs.promises;
+const path = require('path');
 
-fs.readdir(process.cwd(), async (err,filenames)=>{
+const targetDir = process.argv[2] || process.cwd();
+
+fs.readdir(targetDir, async (err,filenames)=>{
     if (err) {
         console.log(err);
     }
 
     const statPromises = filenames.map(filename =>{
-        return lstat(filename);
+        return lstat(path.join(targetDir, filename));
     });
 
     const allStats = await Promise.all(statPromises);
 
     for(let stats of allStats) {
         const i = allStats.indexOf(stats);
-        console.log(filenames[i], stats.isFile());
+
+        if (stats.isFile()) {
+            console.log(chalk.green(filenames[i]));
+        } else {
+            console.log(chalk.blue(filenames[i]));
+        }
     }
 
 
 
 });
 
-console.log(chalk.blue('Hello world!'));
 
 // const lstat = (filename) =>{
 //     return new Promise((resolve,reject)=>{
